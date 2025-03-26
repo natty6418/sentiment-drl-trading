@@ -3,18 +3,21 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
 from transformers import BitsAndBytesConfig
 
-# Path to your fine-tuned LoRA adapter model
-peft_model_path = "./finetuned_model"
+# === CONFIGURATION ===
+# Set to True to load from Hugging Face Hub
+use_huggingface_hub = True
+hf_repo = "Natty6418/llama2-financial-sentiment"
 
-# Base LLaMA model
+# Local adapter path if not using Hugging Face Hub
+peft_model_path = "./finetuned_model"
 base_model_name = "meta-llama/Llama-2-7b-hf"
 
-# Load tokenizer
-tokenizer = AutoTokenizer.from_pretrained(base_model_name)
+# === TOKENIZER ===
+tokenizer = AutoTokenizer.from_pretrained(hf_repo if use_huggingface_hub else base_model_name)
 tokenizer.pad_token = tokenizer.eos_token
 tokenizer.padding_side = "right"
 
-# Load base model with quantization
+# === MODEL LOADING ===
 bnb_config = BitsAndBytesConfig(
     load_in_4bit=True,
     bnb_4bit_quant_type="nf4",
@@ -28,11 +31,12 @@ base_model = AutoModelForCausalLM.from_pretrained(
     device_map="auto"
 )
 
-# Load LoRA adapter
-model = PeftModel.from_pretrained(base_model, peft_model_path)
+# Load LoRA adapter from HF or local path
+adapter_source = hf_repo if use_huggingface_hub else peft_model_path
+model = PeftModel.from_pretrained(base_model, adapter_source)
 model.eval()
 
-# Inference function
+# === INFERENCE FUNCTION ===
 def generate_response(prompt, max_new_tokens=100):
     inputs = tokenizer(prompt, return_tensors="pt", padding=True).to("cuda")
     with torch.no_grad():
@@ -47,7 +51,7 @@ def generate_response(prompt, max_new_tokens=100):
         )
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-# Test set of example tweets
+# === EXAMPLE TWEETS ===
 example_tweets = {
     "Positive": [
         "Apple shares soar after record-breaking iPhone sales this quarter 📈🍏",
@@ -66,7 +70,7 @@ example_tweets = {
     ]
 }
 
-# Run inference on all tweets
+# === RUN INFERENCE ===
 if __name__ == "__main__":
     instruction = "What is the sentiment of this tweet? Please choose an answer from {negative/neutral/positive}."
 
