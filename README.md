@@ -6,18 +6,6 @@ This repository contains the implementation and evaluation of an ensemble deep r
 
 Traders often face difficulties synthesizing sentiment and technical signals effectively, particularly in volatile markets. Our project addresses this challenge by proposing a multimodal DRL architecture that enhances both profitability and risk management.
 
-## 👨‍💻 Authors
-
-- Walid Al-Eisawi  
-- Natty Metekie  
-- Abay Oralov  
-- Hamdan Zoghbor  
-
-Capstone Coordinators:  
-- Pradeep George  
-- Muhammad Abdullah Hanif  
-- Muhammad Shafique  
-
 AY: 2024–2025, NYU Abu Dhabi Engineering Capstone
 
 ## 🧠 Architecture
