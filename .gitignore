@@ -1,3 +1,4 @@
 trained_models/
 ppo_gating_tensorboard
 results
+trained_models/*
