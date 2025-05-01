@@ -71,8 +71,33 @@ These were fused into a unified action vector for live trading decisions.
 
 ## 📁 Project Structure
 
-├── data/ # Preprocessed financial & sentiment datasets ├── agents/ # TD3, PPO, A2C implementations ├── ensemble/ # Distillation, Stacked RL, Mixture of Experts ├── evaluation/ # Performance metrics & visualizations ├── notebooks/ # Experiment tracking & result plots ├── README.md
-
+```text
+.
+├── AlphaVantage.py                 # Script for fetching news sentiment using Alpha Vantage API
+├── datasets/
+│   ├── dow30_monthly_news_sentiment.csv  # Preprocessed sentiment scores
+│   └── merged_df.csv                      # Combined sentiment and stock data
+├── fineTunning/
+│   ├── finetuned_model/           # Directory for saved fine-tuned models
+│   ├── fineTunning.py             # Script to fine-tune language model
+│   ├── infer.ipynb                # Inference notebook for sentiment analysis
+│   ├── infer.py                   # Script for batch inference
+│   ├── requirements.txt           # Dependencies for fine-tuning
+│   └── run_finetuning.slurm       # SLURM script for remote training
+├── Meta Policy.ipynb              # Notebook for ensemble meta-policy strategy
+├── Trading Bot.ipynb              # Main bot logic with evaluation and strategy switching
+├── requirements.txt               # Main project dependencies
+└── trained_models/
+    ├── agent_a2c.zip
+    ├── agent_a2c_sentiment.zip
+    ├── agent_ddpg.zip
+    ├── agent_ddpg_sentiment.zip
+    ├── agent_ppo.zip
+    ├── agent_ppo_sentiment.zip
+    ├── agent_td3.zip
+    ├── agent_td3_sentiment.zip
+    └── ppo_moe_gating_sb3.zip
+```
 
 ## 📌 Acknowledgments
 
