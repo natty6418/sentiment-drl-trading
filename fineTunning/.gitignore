@@ -1,0 +1,8 @@
+data/
+runs/
+slurm*.slurm
+
+.env
+
+finetuned_model/
+Tweets/
