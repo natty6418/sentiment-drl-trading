@@ -3,3 +3,10 @@ ppo_gating_tensorboard
 results
 trained_models/*
 datasets/*
+data/
+Meta Policy copy.ipynb
+*.pth
+*.zip
+Stacked_plot/
+student_plot/
+MoE_plot/
