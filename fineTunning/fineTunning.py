@@ -151,14 +151,14 @@ training_args = TrainingArguments(
     gradient_accumulation_steps=8,
     learning_rate=1e-4,
     weight_decay=0.01,
-    warmup_steps=200,                 # your 1000 might be huge for small datasets
+    warmup_steps=200,                 
     logging_steps=50,
     save_steps=500,
     eval_strategy="steps",
     eval_steps=500,
     fp16=True,
     remove_unused_columns=False,
-    report_to="tensorboard",          # uses built-in TB; no SummaryWriter needed
+    report_to="tensorboard",         
     seed=SEED,
 )
 
